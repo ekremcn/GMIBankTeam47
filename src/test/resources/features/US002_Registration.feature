@@ -5,8 +5,15 @@ Feature:US002 System should not allow anyone to register with invalid credential
 
     @wipE
   Scenario: TC_001 Any field on the registration page should not be left blank
-    When User fills in the blanks
-    Then User doesn't should see any error message
+    When User clicks on Register button without filling blanks
+    Then User should see all error message
+
+  Scenario Outline:TC_002
+
+    Examples:
+    |SSN|FirstName|LastName|Address|MobilePhoneNumber|Username|Email|Password|PasswordConfirm|
+    |   |         |        |       |                 |        |     |        |               |
+    |   |         |        |       |                 |        |     |        |               |
 
   Scenario Outline: TC_002, TC_003, TC_004 Mobile phone number cannot be of any chars nor spec chars except "-"
     Then User clicks on Mobile Phone Number textboxD
@@ -17,3 +24,4 @@ Feature:US002 System should not allow anyone to register with invalid credential
       | invalid_mpn1 |
       | invalid_mpn2 |
       | invalid_mpn3 |
+

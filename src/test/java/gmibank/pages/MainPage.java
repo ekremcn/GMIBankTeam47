@@ -13,7 +13,7 @@ public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
     public WebElement accountMenu;
 
     @FindBy(xpath = "//*[.='Register']")
-    public WebElement registerBtn;
+    public WebElement btnRegisterMain;
 
 
 

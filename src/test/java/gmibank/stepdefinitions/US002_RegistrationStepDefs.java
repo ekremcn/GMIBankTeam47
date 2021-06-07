@@ -19,7 +19,7 @@ public class US002_RegistrationStepDefs {
     public void user_on_the_registration_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         mainPage.accountMenu.click();
-        mainPage.registerBtn.click();
+        mainPage.btnRegisterMain.click();
         String expectedURL = "https://gmibank-qa-environment.com/account/register";
         assertEquals(expectedURL,Driver.getDriver().getCurrentUrl());
     }
@@ -27,10 +27,23 @@ public class US002_RegistrationStepDefs {
 
     @When("User fills in the blanks")
     public void userFillsInTheBlanks() {
-        registrationPage.inputSSN.sendKeys("");
+        registrationPage.btnRegister.click();
+        registrationPage.whichBoxIsMissing();
     }
 
     @Then("User doesn't should see any error message")
     public void userDoesnTShouldSeeAnyErrorMessage() {
+    }
+
+    @When("User clicks on Register button without filling blanks")
+    public void userClicksOnRegisterButtonWithoutFillingBlanks() {
+        registrationPage.btnRegister.click();
+
+    }
+
+    @Then("User should see all error message")
+    public void userShouldSeeAllErrorMessage() {
+        System.out.println(registrationPage.feedbacks.size());
+        assertTrue(registrationPage.feedbacks.size()==9);
     }
 }

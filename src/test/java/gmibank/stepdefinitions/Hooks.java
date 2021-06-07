@@ -1,27 +1,30 @@
 package gmibank.stepdefinitions;
 
 import gmibank.utilities.Driver;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
+import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
     @Before
-    public void setUp() {
-        //   System.out.println("setUp Çalıştı");
+    public void setUp(){
+        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Driver.getDriver().manage().window().maximize();
     }
 
     @After
-    public void tearDown(Scenario scenario) {
-/*
-        final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-
-        if (scenario.isFailed()) {
-            scenario.embed(screenshot, "image/png");
-        }*/
+    public void tearDown(Scenario scenario){
+        if(scenario.isFailed()){
+            final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot,"image/png","screenshot");
+        }
         Driver.closeDriver();
     }
+
+
 }
