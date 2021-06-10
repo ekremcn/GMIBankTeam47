@@ -3,19 +3,18 @@ Feature:US002 System should not allow anyone to register with invalid credential
   Background: User navigates to register page of gmi bank application
     Given User on the registration page
 
-    @wipE
-  Scenario: TC_001 Any field on the registration page should not be left blank
+
+  Scenario: TC_001 Any blank field on the registration page should give the error
     When User clicks on Register button without filling blanks
     Then User should see all error message
 
-  Scenario Outline:TC_002
+    @wipE
+  Scenario:TC_002 Any field on the registration page should not be left blank
+    When User fill in the blanks with valid credentials
+    Then User should not see any feedback error
 
-    Examples:
-    |SSN|FirstName|LastName|Address|MobilePhoneNumber|Username|Email|Password|PasswordConfirm|
-    |   |         |        |       |                 |        |     |        |               |
-    |   |         |        |       |                 |        |     |        |               |
 
-  Scenario Outline: TC_002, TC_003, TC_004 Mobile phone number cannot be of any chars nor spec chars except "-"
+  Scenario Outline: TC_003, TC_004, TC_005 Mobile phone number cannot be of any chars nor spec chars except "-"
     Then User clicks on Mobile Phone Number textboxD
     Then User provide invalid Mobile Phone Number "<invalid_mpns>" and click tabD
     And User should see the Mobile Phone Number error message "mobile_phone_number_error_message2"D
