@@ -1,5 +1,6 @@
 package gmibank.stepdefinitions;
 
+import com.github.javafaker.Faker;
 import gmibank.pages.MainPage;
 import gmibank.pages.RegistrationPage;
 import gmibank.utilities.ConfigurationReader;
@@ -14,6 +15,7 @@ public class US002_RegistrationStepDefs {
 
     MainPage mainPage = new MainPage();
     RegistrationPage registrationPage = new RegistrationPage();
+    Faker faker = new Faker();
 
     @Given("User on the registration page")
     public void user_on_the_registration_page() {
@@ -45,5 +47,39 @@ public class US002_RegistrationStepDefs {
     public void userShouldSeeAllErrorMessage() {
         System.out.println(registrationPage.feedbacks.size());
         assertTrue(registrationPage.feedbacks.size()==9);
+    }
+
+    @When("User fill in the blanks with valid credentials")
+    public void userFillInTheBlanksWithValidCredentials() {
+        String ssn = faker.idNumber().ssnValid().replace(".","-");
+        String firstName = faker.name().firstName().replaceAll("'", "");
+        String lastName = faker.name().lastName().replaceAll("'", "");
+        String mobileNumber = faker.phoneNumber().cellPhone()
+                .replace(".","-")
+                .replace("(","")
+                .replace(")","")
+                .replace(" ","-");
+        System.out.println(mobileNumber);
+        String username = firstName.toLowerCase()+lastName.toLowerCase()+faker.number().digits(2);
+        String password = faker.internet().password(8,12,true,true);
+        registrationPage.inputSSN.sendKeys(ssn);
+        registrationPage.inputFirstname.sendKeys(firstName);
+        registrationPage.inputLastname.sendKeys(lastName);
+        registrationPage.inputAddress.sendKeys(faker.address().fullAddress());
+        registrationPage.inputMobilePhone.sendKeys(mobileNumber);
+        registrationPage.inputUsername.sendKeys(username);
+        registrationPage.inputEmail.sendKeys(username+"@onlinemail.com");
+        registrationPage.inputFirstPass.sendKeys(password);
+        registrationPage.inputSecondPass.sendKeys(password);
+
+        String customerInfo = ssn+", "+firstName+", "+lastName+", "+mobileNumber+", "+username+", "+password;
+
+        registrationPage.customerInfoToTxt(customerInfo);
+        registrationPage.btnRegister.click();
+    }
+
+    @Then("User should not see any feedback error")
+    public void userShouldNotSeeAnyFeedbackError() {
+        assertTrue(registrationPage.feedbacks.size()==0);
     }
 }
