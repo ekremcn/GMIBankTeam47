@@ -8,6 +8,7 @@ import gmibank.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.Keys;
 
 import static org.junit.Assert.*;
 
@@ -81,5 +82,37 @@ public class US002_RegistrationStepDefs {
     @Then("User should not see any feedback error")
     public void userShouldNotSeeAnyFeedbackError() {
         assertTrue(registrationPage.feedbacks.size()==0);
+    }
+
+    @When("User fill in the Mobile Phone Number textbox with {string}")
+    public void userFillInTheMobilePhoneNumberTextboxWith(String phone_number) {
+        registrationPage.inputMobilePhone.sendKeys(phone_number+ Keys.TAB);
+        Driver.wait(4);
+    }
+
+    @Then("User should see the Mobile Phone Number error feedback message")
+    public void userShouldSeeTheMobilePhoneNumberErrorFeedbackMessage() {
+        assertTrue(registrationPage.mobilePhoneErrorMsg.isDisplayed());
+    }
+
+    @When("User fill in the E-Mail textbox with {string}")
+    public void userFillInTheEMailTextboxWith(String invalid_mail) {
+        registrationPage.inputEmail.sendKeys(invalid_mail+Keys.TAB);
+        Driver.wait(4);
+    }
+
+    @Then("User should see the E-Mail error feedback message")
+    public void userShouldSeeTheEMailErrorFeedbackMessage() {
+        assertTrue(registrationPage.emailErrorMsg.isDisplayed());
+    }
+
+    @When("User fill in the SSN textbox with {string}")
+    public void userFillInTheSSNTextboxWith(String invalid_ssn) {
+        registrationPage.inputSSN.sendKeys(invalid_ssn+Keys.TAB);
+    }
+
+    @Then("User should see the SSN error feedback message")
+    public void userShouldSeeTheSSNErrorFeedbackMessage() {
+        assertTrue(registrationPage.ssnErrorMsg.isDisplayed());
     }
 }
