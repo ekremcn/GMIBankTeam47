@@ -17,6 +17,9 @@ public class RegistrationPage extends MainPage {
     @FindBy(id = "ssn")
     public WebElement inputSSN;
 
+    @FindBy(xpath="//input[@id='ssn']/../*[3]")
+    public WebElement ssnErrorMsg;
+
     @FindBy(id = "firstname")
     public WebElement inputFirstname;
 
@@ -43,6 +46,12 @@ public class RegistrationPage extends MainPage {
 
     @FindBy(id = "register-submit")
     public WebElement btnRegister;
+
+    @FindBy(xpath="//input[@id='mobilephone']/../*[3]")
+    public WebElement mobilePhoneErrorMsg;
+
+    @FindBy(xpath="//input[@id='email']/../*[3]")
+    public WebElement emailErrorMsg;
 
     @FindAll({
             @FindBy(xpath = "//input/../*[3]")
