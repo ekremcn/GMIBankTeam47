@@ -41,6 +41,7 @@ public class US002_RegistrationStepDefs {
     @When("User clicks on Register button without filling blanks")
     public void userClicksOnRegisterButtonWithoutFillingBlanks() {
         registrationPage.btnRegister.click();
+        registrationPage.whichBoxIsMissing();
 
     }
 

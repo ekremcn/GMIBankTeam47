@@ -5,9 +5,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -99,21 +97,24 @@ public class RegistrationPage extends MainPage {
     public void customerInfoToTxt(String info) {
         try{
             // Create new file
-
             String projectPath = System.getProperty("user.dir");
             String path= projectPath+"/src/test/resources/Customer_Info.txt";
             File file = new File(path);
 
+            BufferedReader br = new BufferedReader(new FileReader(path));
+
             // If file doesn't exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
+            }else{
+
             }
 
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
 
             // Write in file
-            bw.write(info);
+            bw.append(info+"\n");
 
             // Close connection
             bw.close();
