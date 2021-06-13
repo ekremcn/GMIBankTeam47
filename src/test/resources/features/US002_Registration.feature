@@ -9,7 +9,7 @@ Feature:US002 System should not allow anyone to register with invalid credential
     When User clicks on Register button without filling blanks
     Then User should see all error message
 
-
+  @wip
   Scenario:TC_002 Any field on the registration page should not be left blank
     When User fill in the blanks with valid credentials
     Then User should not see any feedback error

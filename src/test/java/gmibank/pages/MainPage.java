@@ -15,6 +15,11 @@ public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
     @FindBy(xpath = "//*[.='Register']")
     public WebElement btnRegisterMain;
 
+    @FindBy(xpath="//*[text()='Password changed!']")
+    public WebElement passChangedAlert;
+
+
+
 
 
 
