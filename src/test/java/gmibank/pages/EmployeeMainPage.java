@@ -20,6 +20,9 @@ public class EmployeeMainPage {
     @FindBy(xpath ="//*[text() ='Manage Accounts']" )
     public WebElement menageAccounts;
 
+    @FindBy(id ="jh-create-entity" )
+    public WebElement createANewAccountButton;
+
     @FindBy(xpath ="//*[text() ='Home']" )
     public WebElement homeButtonEmployeePage;
 

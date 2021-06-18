@@ -19,7 +19,7 @@ public class US004_LoginPageStepDefinition {
 
     @Given("User access to main page")
     public void userAccessToMainPage() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("gmibank_qa_url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
     }
 
     @And("User click to icon")
