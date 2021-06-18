@@ -9,14 +9,50 @@ public class MainPage {
 
 public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @FindBy(id = "account-menu")
     public WebElement accountMenu;
 
-    @FindBy(xpath = "//*[.='Register']")
+    @FindBy(xpath = "//a[@aria-haspopup='true']")
+    public WebElement icon;
+
+    @FindBy(xpath = "(//*[text='Sign in'])[1]")
+    public WebElement btnSignInMain;
+
+    @FindBy(xpath = "(//*[text='Register']")
     public WebElement btnRegisterMain;
 
+    @FindBy(xpath ="//*[text() ='Register']")
+    public WebElement register;
+
+    @FindBy(xpath = "(//*[text()='Sign in'])[1]")
+    public WebElement signInButton;
+
+    @FindBy(id = "account-menu")
+    public WebElement iconMenu;
 
 
+    @FindBy(xpath = "//*[text()='Register']")
+    public WebElement registerButton;
 
 
 
