@@ -41,6 +41,12 @@ public class RegistrationPage extends MainPage {
     @FindBy(id="register-submit")
     public WebElement btnRegister;
 
+    @FindBy(xpath = "//div[@class='invalid-feedback']")
+    public WebElement ssnRequiredErrorMessage;
+
+    @FindBy(xpath = "(//div[@class='invalid-feedback'])[1]")
+    public WebElement mobilePhoneNumberErrorMessage;
+
     @FindAll({
             @FindBy(xpath = "//input/../*[3]")
     })

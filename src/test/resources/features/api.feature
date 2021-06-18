@@ -1,5 +1,10 @@
 @api
-  Feature: Gmi Bank Api Test
-    Scenario: Read all customer
-      Given user go to api end point "https://www.gmibank.com/api/tp-customers"
-      And read all customer and sets response
+  Feature: Customer Api Validation
+
+    Background: Api end point is being set in response
+      Given User provides the api end point to set the response using "customer_api_endpoint" "api_bearer_token"
+
+    Scenario: Read all customer and validate
+      And All customer info will be set to customers with deserialization
+      And All customer info will be saved to txt files
+      And All customer info has been validated

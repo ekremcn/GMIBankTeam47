@@ -9,6 +9,8 @@ public class MainPage {
 
 public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
 
+
+
     @FindBy(id = "account-menu")
     public WebElement accountMenu;
 
@@ -16,7 +18,8 @@ public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
     public WebElement btnRegisterMain;
 
 
-
+    @FindBy(xpath = "(//*[text()='Sign in'])[1]")
+    public WebElement signInButton;
 
 
 
