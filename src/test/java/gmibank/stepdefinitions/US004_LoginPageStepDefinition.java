@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class US004_LoginPageStepDefinition {
+
     MainPage mainPage = new MainPage();
     SignInPage signInPage = new SignInPage();
 
@@ -90,3 +91,4 @@ public class US004_LoginPageStepDefinition {
     }
 
 }
+

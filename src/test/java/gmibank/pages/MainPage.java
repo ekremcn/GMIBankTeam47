@@ -30,7 +30,7 @@ public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
 
 
     @FindBy(id = "account-menu")
-    public WebElement accountMenu;
+    public WebElement btnAccountMenu;
 
     @FindBy(xpath = "//a[@aria-haspopup='true']")
     public WebElement icon;
@@ -41,20 +41,35 @@ public MainPage(){  PageFactory.initElements(Driver.getDriver(),this); }
     @FindBy(xpath = "(//*[text='Register']")
     public WebElement btnRegisterMain;
 
-    @FindBy(xpath ="//*[text() ='Register']")
-    public WebElement register;
+// <<<<<<< Harun47
+//     @FindBy(xpath ="//*[text() ='Register']")
+//     public WebElement register;
 
-    @FindBy(xpath = "(//*[text()='Sign in'])[1]")
-    public WebElement signInButton;
+//     @FindBy(xpath = "(//*[text()='Sign in'])[1]")
+//     public WebElement signInButton;
 
-    @FindBy(id = "account-menu")
-    public WebElement iconMenu;
+//     @FindBy(id = "account-menu")
+//     public WebElement iconMenu;
+// =======
+    @FindBy(css="#login-item")
+    public WebElement btnSigninMain;
+// >>>>>>> main
 
+    @FindBy(xpath= "//button[contains(@class,'btn-primary')]")
+    public WebElement btnSignin;
 
-    @FindBy(xpath = "//*[text()='Register']")
-    public WebElement registerButton;
+// <<<<<<< Harun47
+//     @FindBy(xpath = "//*[text()='Register']")
+//     public WebElement registerButton;
+// =======
+    @FindBy(css="#username")
+    public WebElement inputUsername;
+// >>>>>>> main
 
+    @FindBy(css="#password")
+    public WebElement inputPassword;
 
-
+    @FindBy(xpath="//*[contains(@class,'fa-lock')]")
+    public WebElement btnPassword;
 
 }
