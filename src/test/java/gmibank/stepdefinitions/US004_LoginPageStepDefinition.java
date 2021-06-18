@@ -30,7 +30,7 @@ public class US004_LoginPageStepDefinition {
 
     @And("User click to Sign in button")
     public void userClickToSignInButton() {
-        mainPage.signInButton.click();
+        mainPage.btnSigninMain.click();
         Driver.wait(2);
     }
 
