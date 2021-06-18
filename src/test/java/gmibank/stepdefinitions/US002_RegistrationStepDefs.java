@@ -17,7 +17,7 @@ public class US002_RegistrationStepDefs {
 
     @Given("User on the registration page")
     public void user_on_the_registration_page() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("homepage_url"));
         mainPage.accountMenu.click();
         mainPage.btnRegisterMain.click();
         String expectedURL = "https://gmibank-qa-environment.com/account/register";
