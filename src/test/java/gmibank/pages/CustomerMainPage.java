@@ -20,23 +20,7 @@ public class CustomerMainPage {
     @FindBy(xpath ="//*[text() ='Transfer Money']" )
     public WebElement transferMoney;
 
-    @FindBy(id ="fromAccountId" )
-    public WebElement fromAccountTextBox;
 
-    @FindBy(id ="toAccountId" )
-    public WebElement toAccountTextBox;
-
-    @FindBy(id ="balance" )
-    public WebElement balance$TextBox;
-
-    @FindBy(id ="balancecent" )
-    public WebElement balanceCentTextBox;
-
-    @FindBy(id ="description" )
-    public WebElement descriptionTextBox;
-
-    @FindBy(id ="make-transfer" )
-    public WebElement makeTransferButton;
 
 
 

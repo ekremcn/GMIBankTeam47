@@ -126,7 +126,7 @@ public class US002_RegistrationStepDefs {
 
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         mainPage.btnAccountMenu.click();
-        mainPage.btnSigninMain.click();
+        mainPage.btnSignInMain.click();
 
         switch(user_type) {
             case "TestAdmin":
@@ -149,7 +149,7 @@ public class US002_RegistrationStepDefs {
                 System.out.println("Select one of TestAdmin, TestCustomer, TestManager, TestEmployee");
         }
 
-        mainPage.btnSignin.click();
+        mainPage.btnSignInMain.click();
 
     }
 

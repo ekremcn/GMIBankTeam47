@@ -20,7 +20,7 @@ public class AdminMainPage {
     @FindBy(xpath = "//*[text()='Created date']")
     public WebElement createDateButton;
 
-    @FindBy(xpath="//a[@href='/admin/user-management/demo47username001/edit']")
+    @FindBy(xpath="//a[@href='/admin/user-management/demo47username0011/edit']")
     public WebElement editButton;
 
     @FindBy(id="activated")

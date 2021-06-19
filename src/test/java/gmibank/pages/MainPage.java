@@ -18,17 +18,17 @@ public class MainPage {
     @FindBy(xpath = "//a[@aria-haspopup='true']")
     public WebElement icon;
 
-    @FindBy(xpath = "//*[text()='Sign in'])[1]")
+    @FindBy(xpath = "//*[text()='Sign in'][1]")
     public WebElement btnSignInMain;
 
     @FindBy(xpath = "//*[text()='Register']")
     public WebElement btnRegisterMain;
 
-    @FindBy(css = "#login-item")
-    public WebElement btnSigninMain;
+//    @FindBy(css = "#login-item")
+//    public WebElement btnSigninMain;
 
-    @FindBy(xpath = "//button[contains(@class,'btn-primary')]")
-    public WebElement btnSignin;
+//    @FindBy(xpath = "//button[contains(@class,'btn-primary')]")
+//    public WebElement btnSignin;
 
     @FindBy(css = "#username")
     public WebElement inputUsername;
