@@ -6,10 +6,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -143,6 +142,21 @@ public class Driver {
                 select.getOptions().get(i).click();
                 break;
             }
+        }
+    }
+
+    public static void selectDdValue(WebElement element, String textToSelect) {
+        try {
+            Select select = new Select(element);
+            List<WebElement> options = select.getOptions();
+            for (WebElement el : options) {
+                if (el.getText().equals(textToSelect)) {
+                    select.selectByVisibleText(textToSelect);
+                    break;
+                }
+            }
+        } catch (UnexpectedTagNameException e) {
+            e.printStackTrace();
         }
     }
 }

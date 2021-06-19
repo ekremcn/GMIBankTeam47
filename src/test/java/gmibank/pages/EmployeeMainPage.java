@@ -27,5 +27,8 @@ public class EmployeeMainPage {
     public WebElement homeButtonEmployeePage;
 
     @FindBy(id ="account-menu" )
-    public WebElement iconAdminPAge;
+    public WebElement iconEmployeePage;
+
+    @FindBy(xpath = "//*[text()='Sign out']")
+    public WebElement signOutButton;
 }
