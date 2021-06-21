@@ -51,6 +51,18 @@ public class RegistrationPage extends MainPage {
     @FindBy(xpath="//input[@id='email']/../*[3]")
     public WebElement emailErrorMsg;
 
+    @FindBy(xpath = "//*[@style='background-color: rgb(255, 0, 0);']")
+    public List<WebElement> red;
+    @FindBy(xpath = "//*[@style='background-color: rgb(255, 153, 0);']")
+    public List<WebElement> orange;
+    @FindBy(xpath = "//*[@style='background-color: rgb(153, 255, 0);']")
+    public List<WebElement> green;
+    @FindBy(xpath = "//*[@style='background-color: rgb(221, 221, 221);']")
+    public List<WebElement> grey;
+    @FindBy(xpath = "//*[@style='background-color: rgb(0, 255, 0);']")
+    public List<WebElement> greendark;
+
+
     @FindAll({
             @FindBy(xpath = "//input/../*[3]")
     })
@@ -122,7 +134,7 @@ public class RegistrationPage extends MainPage {
         catch(Exception e){
             System.out.println(e);
         }
+ }
 
 
-    }
 }

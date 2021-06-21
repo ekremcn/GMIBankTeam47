@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
                 "html:target/default-html-reports"},
         features = "src/test/resources/features",
         glue = "gmibank/stepdefinitions",
-        dryRun = false,
-        tags = "@US008"
+        dryRun = true
+//        tags = "@US008"
 )
 public class CukesRunner {
 }
