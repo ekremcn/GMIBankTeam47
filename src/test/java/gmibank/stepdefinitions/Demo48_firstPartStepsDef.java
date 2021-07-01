@@ -30,7 +30,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class apiUIDemo47StepsDef {
+public class Demo48_firstPartStepsDef {
     MainPage mainPage = new MainPage();
     RegistrationPage registrationPage = new RegistrationPage();
     SignInPage signInPage = new SignInPage();
@@ -49,9 +49,6 @@ public class apiUIDemo47StepsDef {
     Applicants[] applicants;
     CountryObject[] country;
     String filePath = "src/test/resources/testdata/apiCustomersInfo.txt";
-    String filePath1 = "src/test/resources/testdata/AllCountryIdsAfterCreate.txt";
-    String filePath2 = "src/test/resources/testdata/AllCountryIdsAfterUpdate.txt";
-    String filePath3 = "src/test/resources/testdata/AllCountryIdsAfterDelete.txt";
     String filePath41 = "src/test/resources/testdata/AllApplicantsSSN.txt";
     int expectedId;
     int updateId;

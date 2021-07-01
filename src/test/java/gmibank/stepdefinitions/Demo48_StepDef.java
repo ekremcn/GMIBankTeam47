@@ -45,7 +45,6 @@ public class Demo48_StepDef {
     String filePath11 = "src/test/resources/testdata/countriesIdsAfterCreate.txt";
     String filePath21 = "src/test/resources/testdata/countriesIdsAfterUpdate.txt";
     String filePath31 = "src/test/resources/testdata/countriesIdsAfterDelete.txt";
-    String filePath41 = "src/test/resources/testdata/AllApplicantsSSN.txt";
     String expectedName;
     int expectedId;
     int updateId;
