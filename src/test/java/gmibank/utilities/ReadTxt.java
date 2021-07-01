@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadTxt {
-    public static List<Customer> returnCustomer(String filePath){
-        List<Customer>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(ConfigurationReader.getProperty(filePath)))) {
+    public static List<Customer> returnCustomer(String filePath) {
+        List<Customer> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(ConfigurationReader.getProperty(filePath)))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -22,24 +22,23 @@ public class ReadTxt {
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = br.readLine();
-                String [] each = line.split(",");
+                String[] each = line.split(",");
                 customer.setFirstName(each[0]);
                 customer.setLastName(each[1]);
                 customer.setSsn(each[2]);
                 all.add(customer);
             }
             String everything = sb.toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
 
-
-    public static List<Applicants> returnCustomerSNN(String filePath){
-        List<Applicants>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<Applicants> returnCustomerSNN(String filePath) {
+        List<Applicants> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             System.out.println(line);
@@ -54,13 +53,13 @@ public class ReadTxt {
 
                 all.add(applicants);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
-    public static List<Customer> readTxtData(String filePath)throws  Exception{
+    public static List<Customer> readTxtData(String filePath) throws Exception {
         List<Customer> list = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         try {
@@ -85,16 +84,16 @@ public class ReadTxt {
 
     }
 
-    public static List<States> returnAllStates(String filePath){
-        List<States>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<States> returnAllStates(String filePath) {
+        List<States> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             System.out.println(line);
             int i = 0;
             while (line != null) {
                 States state = new States();
-                String [] allLine = line.split(",");
+                String[] allLine = line.split(",");
 
                 int id = Integer.parseInt(allLine[1].trim());
                 state.setId(id);
@@ -106,18 +105,18 @@ public class ReadTxt {
 
                 all.add(state);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
-    public static List<String> returnCustomerSSNList(String filePath){
-        List<String>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<String> returnCustomerSSNList(String filePath) {
+        List<String> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
-           // System.out.println(line);
+            // System.out.println(line);
             int i = 0;
             while (line != null) {
                 Customer customer = new Customer();
@@ -125,19 +124,19 @@ public class ReadTxt {
                 sb.append(System.lineSeparator());
                 line = br.readLine();
 
-             i++;
+                i++;
 
                 all.add(customer.getSsn());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
-    public static List<String> returnCustomerSNNList(String filePath){
-        List<String>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<String> returnCustomerSNNList(String filePath) {
+        List<String> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -152,15 +151,15 @@ public class ReadTxt {
 
                 all.add(customer.getSsn());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
-    public static List<String> returnCountryIdList(String filePath){
-        List<String>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<String> returnCountryIdList(String filePath) {
+        List<String> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             int i = 0;
@@ -172,16 +171,16 @@ public class ReadTxt {
                 i++;
                 all.add(country.getId());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
 
-    public static List<States> returnAllStates2(String filePath){
-        List<States>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<States> returnAllStates2(String filePath) {
+        List<States> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             System.out.println(line);
@@ -197,22 +196,22 @@ public class ReadTxt {
 
                 all.add(states);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
-    public static List<String> returnAllStates3(String filePath){
-        List<String>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public static List<String> returnAllStates3(String filePath) {
+        List<String> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             System.out.println(line);
             int i = 0;
             while (line != null) {
                 String temp = "";
-                temp =line.split(",")[0].trim();
+                temp = line.split(",")[0].trim();
 
                 sb.append(System.lineSeparator());
                 line = br.readLine();
@@ -221,14 +220,15 @@ public class ReadTxt {
 
                 all.add(temp);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
-    public static List<Applicants> returnApplicantsId(String filePath){
-        List<Applicants>all = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+    public static List<Applicants> returnApplicantsId(String filePath) {
+        List<Applicants> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             //System.out.println(line);
@@ -242,10 +242,31 @@ public class ReadTxt {
                 //System.out.println(applicants.getId());
                 all.add(applicants);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return all;
     }
 
+    public static List<String> returnApplicantsSSN(String filePath) {
+        List<String> all = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            //System.out.println(line);
+            int i = 0;
+            while (line != null) {
+                Applicants applicants = new Applicants();
+                applicants.setSsn(line.split(",")[0]);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+                i++;
+                //System.out.println(applicants.getId());
+                all.add(applicants.getSsn());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return all;
+    }
 }

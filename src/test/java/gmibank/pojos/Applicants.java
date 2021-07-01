@@ -8,7 +8,7 @@ public class Applicants {
     private String lastName;
     private String address;
     private String mobilePhoneNumber;
-    private int userId = 1202;
+    private int userId;
     private String userName;
     private String email;
     private String createDate;
