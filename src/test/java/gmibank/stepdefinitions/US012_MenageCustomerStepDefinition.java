@@ -15,7 +15,7 @@ public class US012_MenageCustomerStepDefinition {
     MainPage mainPage = new MainPage();
     SignInPage signInPage = new SignInPage();
     EmployeeMainPage employeeMainPage = new EmployeeMainPage();
-    MenageCustomersPage menageCustomersPage = new MenageCustomersPage();
+    ManageCustomersPage menageCustomersPage = new ManageCustomersPage();
     CreateOrEditACustomerPage createOrEditACustomerPage = new CreateOrEditACustomerPage();
     CustomerInfoPage customerInfoPage = new CustomerInfoPage();
 

@@ -2,6 +2,7 @@ package gmibank.stepdefinitions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gmibank.pages.*;
+import gmibank.pojos.Applicants;
 import gmibank.pojos.CountryObject;
 import gmibank.pojos.CustomerObject;
 import gmibank.utilities.ConfigurationReader;
@@ -45,13 +46,16 @@ public class apiUIDemo47StepsDef {
     Response responseGet;
     String token;
     CustomerObject[] customer;
+    Applicants[] applicants;
     CountryObject[] country;
-    String filePath ="src/test/resources/testdata/apiCustomersInfo.txt";
+    String filePath = "src/test/resources/testdata/apiCustomersInfo.txt";
     String filePath1 = "src/test/resources/testdata/AllCountryIdsAfterCreate.txt";
     String filePath2 = "src/test/resources/testdata/AllCountryIdsAfterUpdate.txt";
     String filePath3 = "src/test/resources/testdata/AllCountryIdsAfterDelete.txt";
+    String filePath41 = "src/test/resources/testdata/AllApplicantsSSN.txt";
     int expectedId;
     int updateId;
+    String expectedSsn;
 
     @Given("User is on main page for access")
     public void userIsOnMainPageForAccess() {
@@ -69,7 +73,8 @@ public class apiUIDemo47StepsDef {
 
     @And("User provides correct information for registration")
     public void userProvidesCorrectInformationForRegistration() {
-        registrationPage.inputSSN.sendKeys(ConfigurationReader.getProperty("demo_ssn"));
+        expectedSsn = ConfigurationReader.getProperty("demo_ssn");
+        registrationPage.inputSSN.sendKeys(expectedSsn);
         Driver.wait(1);
         registrationPage.inputFirstname.sendKeys(ConfigurationReader.getProperty("demo_firstname"));
         Driver.wait(1);
@@ -123,6 +128,21 @@ public class apiUIDemo47StepsDef {
 
     @Then("Employee create two new account for the customer")
     public void employeeCreateTwoNewAccountForTheCustomer() {
+        mainPage.icon.click();
+        Driver.wait(1);
+        mainPage.btnSignInMain.click();
+        Driver.wait(1);
+        signInPage.usernameTextBox.sendKeys("team47employee");
+        Driver.wait(1);
+        signInPage.passwordTextBox.sendKeys("Team47employee.");
+        Driver.wait(1);
+        signInPage.signInButton.click();
+    }
+
+    @Then("User sign in to an Employee Account")
+    public void employeeCreateTwoNewAccountForTheCustomer2() {
+        Driver.getDriver().findElement(By.xpath("//*[text() ='Home']")).click();
+        Driver.wait(1);
         mainPage.icon.click();
         Driver.wait(1);
         mainPage.btnSignInMain.click();
@@ -206,7 +226,7 @@ public class apiUIDemo47StepsDef {
         mapForToken.put("password", "Team47admin.");
         mapForToken.put("rememberMe", false);
 
-        response= given()
+        response = given()
                 .headers("Content-Type", ContentType.JSON, "accept", ContentType.JSON)
                 .when().body(mapForToken)
                 .post("https://gmibank-qa-environment.com/api/authenticate")
@@ -217,11 +237,11 @@ public class apiUIDemo47StepsDef {
 
         // response.prettyPrint();
 
-        token = response.prettyPrint().substring(19,response.prettyPrint().length()-3);
-        System.out.println("token is "+token);
+        token = response.prettyPrint().substring(19, response.prettyPrint().length() - 3);
+        System.out.println("token is " + token);
 
-        response= given()
-                .headers("Authorization", "Bearer "+ token,
+        response = given()
+                .headers("Authorization", "Bearer " + token,
                         "Content-Type", ContentType.JSON,
                         "Accept", ContentType.JSON)
                 .param("size", 2000)
@@ -237,29 +257,29 @@ public class apiUIDemo47StepsDef {
 
     @And("Validate the customer")
     public void validateTheCustomer() throws IOException {
-        ObjectMapper obj =new ObjectMapper();
-        customer =obj.readValue(response.asString(), CustomerObject[].class);
+        ObjectMapper obj = new ObjectMapper();
+        customer = obj.readValue(response.asString(), CustomerObject[].class);
 
-        File file=new File(filePath);
-        if(file !=null){
+        File file = new File(filePath);
+        if (file != null) {
             file.delete();
         }
         WriteToTxt.saveAllCustomerData(filePath, customer);
 
         List<String> actualSsnList = ReadTxt.returnCustomerSNNList(filePath);
 
-        String lastSSN =actualSsnList.get(actualSsnList.size()-1);
-        System.out.println("Last ssn is: " +lastSSN);
+        String lastSSN = actualSsnList.get(actualSsnList.size() - 1);
+        System.out.println("Last ssn is: " + lastSSN);
 
         List<String> expectedSsnList = new ArrayList<>();
         expectedSsnList.add(ConfigurationReader.getProperty("demo_ssn"));
 
-        if(lastSSN.equals(ConfigurationReader.getProperty("demo_ssn"))){
+        if (lastSSN.equals(ConfigurationReader.getProperty("demo_ssn"))) {
             System.out.println("Create is successful");
         }
-        if( actualSsnList.containsAll(expectedSsnList)){
+        if (actualSsnList.containsAll(expectedSsnList)) {
             System.out.println("Ssn number is matching");
-        }else{
+        } else {
             System.out.println("Ssn number is not matching");
         }
 
@@ -267,180 +287,22 @@ public class apiUIDemo47StepsDef {
 
     }
 
-    @And("xUser creates a new country from api using {string}")
-    public void xUserCreatesANewCountryFromApiUsing(String endPoint) throws IOException {
-        Map<String, Object> mapForToken = new HashMap<>();
-        mapForToken.put("username", "team47admin");
-        mapForToken.put("password", "Team47admin.");
-        mapForToken.put("rememberMe", false);
+    @And("Validate the customer of applicants endpoint")
+    public void validateTheCustomerOfApplicantsEndpoint() throws IOException {
+        ObjectMapper obj = new ObjectMapper();
+        applicants = obj.readValue(response.asString(), Applicants[].class);
 
-        response= given()
-                .headers("Content-Type", ContentType.JSON, "accept", ContentType.JSON)
-                .when().body(mapForToken)
-                .post("https://gmibank-qa-environment.com/api/authenticate")
-                .then()
-                .contentType(ContentType.JSON)
-                .extract()
-                .response();
-
-        // response.prettyPrint();
-
-        token = response.prettyPrint().substring(19,response.prettyPrint().length()-3);
-        System.out.println("token is "+token);
-
-        Map<String, Object> createANewCountry = new HashMap<>();
-        createANewCountry.put("name", "EskiDunya");
-        createANewCountry.put("states", null);
-        response = RestAssured.
-                given().
-                headers("Authorization", "Bearer " + token,
-                        "Content-Type", ContentType.JSON,
-                        "Accept", ContentType.JSON)
-                .when()
-                .body(createANewCountry)
-                .post(ConfigurationReader.getProperty(endPoint));
-        response.prettyPrint();
-        JsonPath jsonPath = response.jsonPath();
-        expectedId = jsonPath.getInt("id");
-        System.out.println(expectedId);
-    }
-    @Then("xUser validates that country is created")
-    public void xUserValidatesThatCountryIsCreated() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        responseGet = RestAssured.given().headers("Authorization", "Bearer " + token,
-                "Content-Type", ContentType.JSON,
-                "Accept", ContentType.JSON)
-                .when().contentType(ContentType.JSON)
-                .get("https://gmibank-qa-environment.com/api/tp-countries")
-                .then()
-                .extract()
-                .response();
-        //responseGet.prettyPrint();
-        country = objectMapper.readValue(responseGet.asString(), CountryObject[].class);
-//        for (int i = 0; i < country.length; i++) {
-//            System.out.println(country[i].getName());
-//        }
-        File file = new File(filePath1);
+        File file = new File(filePath41);
         if (file != null) {
             file.delete();
         }
-        WriteToTxt.saveDataInFileWithCountryid(filePath1, country);
-        List<String> actualCountryIds = ReadTxt.returnCountryIdList(filePath1);
-        Assert.assertTrue(actualCountryIds.contains(expectedId+""));
+        WriteToTxt.saveDataInFileWithSSN(filePath41, applicants);
+
+        List<String> actualSsnList = ReadTxt.returnApplicantsSSN(filePath41);
+
+        Assert.assertTrue("Ssn number is not mach!", actualSsnList.contains(expectedSsn));
+        System.out.println("Validation Successful");
+        Driver.wait(5);
+
     }
-
-    @And("xUser update created country using api end point {string}")
-    public void xUserUpdateCreatedCountryUsingApiEndPoint(String endPoint) {
-        Map<String, Object> mapForToken = new HashMap<>();
-        mapForToken.put("username", "team47admin");
-        mapForToken.put("password", "Team47admin.");
-        mapForToken.put("rememberMe", false);
-
-        response= given()
-                .headers("Content-Type", ContentType.JSON, "accept", ContentType.JSON)
-                .when().body(mapForToken)
-                .post("https://gmibank-qa-environment.com/api/authenticate")
-                .then()
-                .contentType(ContentType.JSON)
-                .extract()
-                .response();
-
-        // response.prettyPrint();
-
-        token = response.prettyPrint().substring(19,response.prettyPrint().length()-3);
-        System.out.println("token is "+token);
-
-        updateId = expectedId;
-        Map<String, Object> updatedCountry = new HashMap<>();
-        updatedCountry.put("id", updateId);
-        updatedCountry.put("name", "YeniDunya");
-        updatedCountry.put("states", null);
-        response = RestAssured.
-                given().
-                headers("Authorization", "Bearer " + token,
-                        "Content-Type", ContentType.JSON,
-                        "Accept", ContentType.JSON)
-                .when()
-                .body(updatedCountry)
-                .put(ConfigurationReader.getProperty(endPoint));
-        response.prettyPrint();
-    }
-    @Then("xUser validates that country is updated")
-    public void xUserValidatesThatCountryIsUpdated() {
-        responseGet = RestAssured.given().headers("Authorization", "Bearer " + token,
-                "Content-Type", ContentType.JSON,
-                "Accept", ContentType.JSON)
-                .when().contentType(ContentType.JSON)
-                .get("https://gmibank-qa-environment.com/api/tp-countries" + updateId)
-                .then()
-                .extract()
-                .response();
-        JsonPath json = response.jsonPath();
-        String actualName = json.getString("name");
-
-        File file = new File(filePath2);
-        if (file != null) {
-            file.delete();
-        }
-        WriteToTxt.saveDataInFileWithCountryid(filePath2, country);
-        List<String> actualCountryIds = ReadTxt.returnCountryIdList(filePath2);
-        Assert.assertEquals("YeniDunya", actualName);
-    }
-
-    @And("xUser delete created country using api end point {string} {string}")
-    public void xUserDeleteCreatedCountryUsingApiEndPointD(String endPoint, String id) {
-        Map<String, Object> mapForToken = new HashMap<>();
-        mapForToken.put("username", "team47admin");
-        mapForToken.put("password", "Team47admin.");
-        mapForToken.put("rememberMe", false);
-
-        response= given()
-                .headers("Content-Type", ContentType.JSON, "accept", ContentType.JSON)
-                .when().body(mapForToken)
-                .post("https://gmibank-qa-environment.com/api/authenticate")
-                .then()
-                .contentType(ContentType.JSON)
-                .extract()
-                .response();
-
-        // response.prettyPrint();
-
-        token = response.prettyPrint().substring(19,response.prettyPrint().length()-3);
-        System.out.println("token is "+token);
-
-
-        response = RestAssured.
-                given().
-                headers("Authorization", "Bearer " + token,
-                        "Content-Type", ContentType.JSON,
-                        "Accept", ContentType.JSON)
-                .when()
-                .delete(ConfigurationReader.getProperty(endPoint) + id);
-    }
-    @Then("xUser validates that country is deleted")
-    public void xUserValidatesThatCountryIsDeleted() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        responseGet = RestAssured.given().headers("Authorization", "Bearer " + token,
-                "Content-Type", ContentType.JSON,
-                "Accept", ContentType.JSON)
-                .when().contentType(ContentType.JSON)
-                .get("https://gmibank-qa-environment.com/api/tp-countries")
-                .then()
-                .extract()
-                .response();
-        //responseGet.prettyPrint();
-        country = objectMapper.readValue(responseGet.asString(), CountryObject[].class);
-//        for (int i = 0; i < country.length; i++) {
-//            System.out.println(country[i].getName());
-//        }
-        File file = new File(filePath3);
-        if (file != null) {
-            file.delete();
-        }
-        WriteToTxt.saveDataInFileWithCountryid(filePath3, country);
-        List<String> actualCountryIds = ReadTxt.returnCountryIdList(filePath3);
-        Assert.assertFalse(actualCountryIds.contains(updateId));
-    }
-
-
 }
